@@ -7,17 +7,22 @@ var twitter = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
 
-
-twitter.search('#nodejs OR nodejs OR node.js', { geocode: '42.3319,-83.046513,60mi', rpp: 100, request_type: 'recent' }, function(err, data) {
-  data.results.forEach(function(tweet) {
-    console.log(stylize(tweet.from_user) + ':', tweet.text);
+var whoami;
+twitter.verifyCredentials(function(err, data) {
+  whoami = data.screen_name;
+  var params = { geocode: '42.3319,-83.046513,60mi', rpp: 100 };
+  twitter.search('#nodejs OR nodejs OR node.js', params, function(err, data) {
+    data.results.forEach(function(tweet) {
+      console.log(stylize(tweet.from_user) + ':', tweet.text);
+    });
   });
 });
 
 
+
 var colorIndex = 0;
 function stylize(str) {
-  if (str === 'kevino80') {
+  if (str === whoami) {
     return rainbowize(str);
   }
 
