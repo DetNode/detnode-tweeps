@@ -1,5 +1,5 @@
 {
-  "name": "tweetme",
+  "name": "detnode-tweeps",
   "version": "0.0.1",
   "author": "DetNode",
   "description": "Poll Twitter for a hashtag, and send notifications when new tweets arrive.",
